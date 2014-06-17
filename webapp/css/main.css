@@ -1,0 +1,49 @@
+body {
+	background: #F5F4EF;
+	color: #000305;
+	font-family: 'Verdana', Trebuchet, 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+ 
+h2 {font-size: 20px}
+h3 {font-size: 18px}
+h4 {font-size: 16px}
+h5 {font-size: 14px}
+h6 {font-size: 12px}
+
+label {
+	font-size: 14px;
+	float: right;
+}
+
+ul {
+	list-style: outside disc;
+	margin: 1em 0 1.5em 1.5em;
+}
+ 
+ol {
+	list-style: outside decimal;
+	margin: 1em 0 1.5em 1.5em;}
+ 
+dl {margin: 0 0 1.5em 0;}
+dt {font-weight: bold;}
+dd {margin-left: 1.5em;}
+ 
+.control-table{
+
+}
+
+.input-field{
+	padding: 5px 5px;
+	border: 1px solid #d4d4d4;
+	line-height: 20px;
+}
+
+.input-button{
+	padding: 5px 5px;
+	line-height: 20px;
+}
+
+.section-header{
+	border-style:none none outset none;
+	border-width:2px;
+}

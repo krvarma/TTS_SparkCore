@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Spark Core Text-to-Speech</title>
+	<link rel="stylesheet" href="css/main.css" type="text/css" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="jquery.blockUI.js"></script>
+	<script>
+		var coreid;
+		var accesstoken;
+		
+        function subscribe() {
+            coreid = document.getElementById("core-id").value;
+			accesstoken = document.getElementById("api-token").value;
+
+            document.getElementById("core-info").innerHTML = "Waiting for data...";
+        }
+		function showVolume(newVal){
+			document.getElementById("volume-value").innerHTML = newVal;
+		}
+		function showWPM(newVal){
+			document.getElementById("wpm-value").innerHTML = newVal;
+		}
+		function callSparkFunction(method, arg){
+			var deviceID = document.getElementById("core-id").value;
+			var accessToken = document.getElementById("api-token").value;
+			
+			console.log("Calling Spark method: " + method + " with argument " + arg);
+			
+			$.blockUI({ css: { 
+				border: 'none', 
+				padding: '15px', 
+				backgroundColor: '#000', 
+				'-webkit-border-radius': '10px', 
+				'-moz-border-radius': '10px', 
+				opacity: .5, 
+				color: '#fff' 
+			} }); 
+			
+			$.post("https://api.spark.io/v1/devices/" + deviceID + "/" + method + "?access_token=" + accessToken,
+					{
+						args:arg
+					},
+					function(result){
+						console.log(result);
+						
+						$.unblockUI();
+					}
+				);
+		}
+		
+		function setVolume(newVal){
+			callSparkFunction("setProp", "Volume=" + newVal);
+		}
+		
+		function setVoice(newVal){
+			callSparkFunction("setProp", "Voice=" + newVal);
+		}
+		
+		function setWPM(newVal){
+			callSparkFunction("setProp", "WordsPerMinute=" + newVal);
+		}
+		
+		function speak(){
+			var text = document.getElementById("textToSpeak").value;
+			
+			callSparkFunction("speak", text);
+		}
+    </script>
+</head>
+
+<header id="banner" class="body">
+	<h1>Spark Core Text-to-Speech using Emic2 TTS Module</h1> 
+ </header>
+ 
+<body id="index" class="home">
+	<table class="control-table">
+		<tr>
+			<td colspan="4"><h3 class="section-header">Spark Core credentials (this will not be saved anywhere)</h3></td>
+		</tr>
+		<tr>
+			<td>
+				<label for="core-id">Core ID</label>
+			</td>
+			<td>
+				<input type="text" id="core-id" placeholder="Core ID" size="32" class="input-field" required/>
+			</td>
+			<td>
+				<label for="api-token" >Access Token</label>
+			</td>
+			<td>
+				<input type="text" id="api-token" placeholder="API Token" size="48" class="input-field" required/>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4"><h3 class="section-header">Text to speak</h3></td>
+		</tr>
+		<tr>
+			<td>
+				<label for="core-id">Text</label>
+			</td>
+			<td colspan="2">
+				<input type="text" id="textToSpeak" placeholder="Text to speak" size="32" class="input-field" required/>
+			</td>
+			<td>
+				<input type="button" id="speak" value="Start Speaking" class="input-button" onclick="speak();"/>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4"><h3 class="section-header">Emic2 properties</h3>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="volume">Volume</label>
+			</td>
+			<td>
+				<input type="range" id="volume" min="0" max="18" oninput="showVolume(this.value)" onchange="setVolume(this.value)" class="input-field" >
+			</td>
+			<td colspan="2">
+				<div id="volume-value" class="slider-value">
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="voice">Voice</label>
+			</td>
+			<td colspan="3">
+				<select onchange="setVoice(this.value)" class="input-field">
+				  <option value="0">Perfect Paul</option>
+				  <option value="1">Huge Harry</option>
+				  <option value="2">Beautiful Betty</option>
+				  <option value="3">Ursula</option>
+				  <option value="4">Dr. Dennis</option>
+				  <option value="5">Kit The Kid</option>
+				  <option value="6">Frail Frank</option>
+				  <option value="7">Rough Rita</option>
+				  <option value="8">Whispering Wendy</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="pitch">Words Per Minute</label>
+			</td>
+			<td>
+				<input type="range" id="pitch" min="70" max="600" oninput="showWPM(this.value)" onchange="setWPM(this.value)" class="input-field">
+			</td>
+			<td colspan="2">
+				<div id="wpm-value" class="slider-value">
+			</td>
+		</tr>
+	</table>
+</body>
+</html>
