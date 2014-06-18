@@ -17,9 +17,12 @@ This sample has two different applications, the Spark Core app and the Web App t
 
 ![enter image description here][5]
 
+![enter image description here][6]
+
 
   [1]: http://www.parallax.com/product/30016
   [2]: https://github.com/dmalec
   [3]: https://github.com/dmalec/SocialChatter
-  [4]: https://raw.githubusercontent.com/krvarma/TTS_SparkCore/master/project.jpg
-  [5]: https://raw.githubusercontent.com/krvarma/TTS_SparkCore/master/web.jpg
+  [4]: https://raw.githubusercontent.com/krvarma/TTS_SparkCore/master/coverimage.JPG
+  [5]: https://raw.githubusercontent.com/krvarma/TTS_SparkCore/master/project.jpg
+  [6]: https://raw.githubusercontent.com/krvarma/TTS_SparkCore/master/web.jpg
